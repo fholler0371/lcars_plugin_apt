@@ -1,0 +1,33 @@
+project = "lcars_plugin_apt"
+version = 1
+author = "Frank Holler"
+
+[setup]
+requirements = ["pyyaml"]
+
+[[systemd]]
+name = "lcars-apt.service"
+start = false
+content = '''
+[Unit]
+Description=Taegliche Pruefung auf Updates 
+
+[Service]
+WorkingDirectory=%base%
+ExecStart=%python% %git%/lcars_plugin_apt/run/run.py %base%
+'''
+
+[[systemd]]
+name = "lcars-apt.timer"
+content = '''
+[Unit]
+Description=Taegliche Pruefung auf Updates 
+
+[Timer]
+OnCalendar=*-*-* 2:00
+RandomizedDelaySec=2h
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+'''
