@@ -19,4 +19,10 @@ async def install(parent_cfg: dict) -> dict:
     requirements = cfg.get('setup', {}).get('requirements')
     if requirements:
         out['requirements'] = requirements
+    run = cfg.get('setup', {}).get('run')
+    if run:
+        for idx, entry in run.items():
+            entry = entry.replace('%base%', parent_cfg.get('folder', {}).get('base', ''))
+            run[idx] = entry.replace('%git%', parent_cfg.get('folder', {}).get('git', ''))
+        out['run'] = run
     return out

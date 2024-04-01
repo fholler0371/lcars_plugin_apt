@@ -5,6 +5,9 @@ author = "Frank Holler"
 [setup]
 requirements = ["pyyaml"]
 
+[setup.run]
+apt = "%git%/lcars_plugin_apt/run/apt.py %base%"
+
 [[systemd]]
 name = "lcars-apt.service"
 start = false
@@ -24,8 +27,8 @@ content = '''
 Description=Taegliche Pruefung auf Updates 
 
 [Timer]
-OnCalendar=*-*-* 2:00
-RandomizedDelaySec=2h
+OnCalendar=*-*-* */6:00:00
+RandomizedDelaySec=1h
 Persistent=true
 
 [Install]
