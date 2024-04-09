@@ -27,7 +27,7 @@ content = '''
 Description=Taegliche Pruefung auf Updates 
 
 [Timer]
-OnCalendar=*-*-* */6:00:00
+OnCalendar=*-*-* 03,09,15,21:00:00
 RandomizedDelaySec=1h
 Persistent=true
 
